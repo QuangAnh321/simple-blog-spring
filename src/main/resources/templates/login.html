@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <title>Personal Blog | Login</title>
+</head>
+<body>
+    <div id="login-form">
+        <form action="#" th:action="@{/login}" method="post" th:object="${loginDTO}">
+            <div class="title">
+                <h3>Sign In</h3>
+                <p>Let's write down what's on your mind</p>
+                <p class="error-message" th:if="${param.error}">Invalid username and/or password.</p>
+                <p class="error-message" th:if="${param.logout}">You have been logged out.</p>
+            </div>
+            <div class="login">
+                <input type="username" th:field="*{username}" placeholder="Your Username">
+                <input type="password" th:field="*{password}" placeholder="Your Password">
+            </div>
+    
+            <div class="login-options">
+                <input type="submit" value="Sign In">
+            </div>
+        </form>
+    </div>
+
+    <h4>First time here ? <a href="/register">Sign Up Now</a></h4>
+</body>
+</html>

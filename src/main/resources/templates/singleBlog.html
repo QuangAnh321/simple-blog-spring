@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title th:text="*{blog.title}">Title</title>
+</head>
+<body>
+    <h3 th:text="${blog.title}">someTitle</h3>
+    <p th:text="${blog.createdAt}">createdAt</p>
+    <p th:text="${blog.content}">someContent</p>
+</body>
+</html>

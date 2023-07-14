@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/styles.css}" />
+    <title>Personal Blog | Register</title>
+</head>
+<body>
+    <div id="register-form">
+        <form action="#" th:action="@{/register}" method="post" th:object="${registerDTO}">
+            <div class="title">
+                <h3>Sign Up</h3>
+            </div>
+            <div class="register">
+                <label for="email">Email:</label><br>
+                <input type="email" name="email" th:field="*{email}" placeholder="Your Email">
+                <br>
+
+                <label for="userName">Name:</label><br>
+                <input type="text" name="userName" th:field="*{name}" placeholder="Your Name">
+                <br>
+
+                <label for="password">Password:</label><br>
+                <input type="password" name="password" th:field="*{password}" placeholder="Your Password">
+                <br>
+            </div>
+    
+            <input type="submit" value="Sign Up">
+        </form>
+    </div>
+
+    <h4>Already have an account ? <a href="/register">Sign In Now</a></h4>
+</body>
+</html>
