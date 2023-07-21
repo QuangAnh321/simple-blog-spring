@@ -8,20 +8,22 @@
 </head>
 <body>
     <div id="login-form">
-        <form action="#" th:action="@{/login}" method="post" th:object="${loginDTO}">
+        <form th:action="@{/login}" method="post">
             <div class="title">
                 <h3>Sign In</h3>
                 <p>Let's write down what's on your mind</p>
-                <p class="error-message" th:if="${param.error}">Invalid username and/or password.</p>
-                <p class="error-message" th:if="${param.logout}">You have been logged out.</p>
+                <div th:if="${param.error}">
+                    Invalid username and password.</div>
+                <div th:if="${param.success}">
+                    You have been logged out.</div>
             </div>
             <div class="login">
-                <input type="username" th:field="*{username}" placeholder="Your Username">
-                <input type="password" th:field="*{password}" placeholder="Your Password">
+                <input type="text" name="username" placeholder="Your Username">
+                <input type="password" name="password" placeholder="Your Password">
             </div>
     
             <div class="login-options">
-                <input type="submit" value="Sign In">
+                <input type="submit" value="Log In">
             </div>
         </form>
     </div>
