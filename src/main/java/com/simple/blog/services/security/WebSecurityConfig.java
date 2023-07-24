@@ -1,19 +1,14 @@
 package com.simple.blog.services.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.core.session.SessionRegistryImpl;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -21,22 +16,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private NamePasswordDetailsService namePasswordDetailsService;
-
-    // @Override
-    // public void configure(HttpSecurity http) throws Exception {
-    //     AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-    //     http.addFilterBefore(authenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class);
-    // }
-
-    // public static WebSecurityConfig webSecurityConfig() {
-    //     return new WebSecurityConfig();
-    // }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
@@ -51,16 +30,13 @@ public class WebSecurityConfig {
         http
             .addFilterBefore(authenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests(requests -> requests
-                .antMatchers( "/", "/register", "/css/**", "/images/**", "/js/**", "/webjars/**").permitAll()
+                .antMatchers( "/", "/login", "/register", "/register/*").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
                 .permitAll()
             )
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .permitAll())
             .sessionManagement()
                 .maximumSessions(1).sessionRegistry(sessionRegistry());
 
@@ -72,13 +48,6 @@ public class WebSecurityConfig {
         filter.setAuthenticationManager(authenticationManager);
         filter.setAuthenticationFailureHandler(failureHandler());
         return filter;
-    }
-
-    public AuthenticationProvider authProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(namePasswordDetailsService);
-        provider.setPasswordEncoder(passwordEncoder);
-        return provider;
     }
 
     public SimpleUrlAuthenticationFailureHandler failureHandler() {

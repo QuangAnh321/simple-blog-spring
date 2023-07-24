@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.simple.blog.models.dtos.LoginDTO;
 import com.simple.blog.models.dtos.RegisterDTO;
-import com.simple.blog.services.security.*;
+import com.simple.blog.services.security.AuthenticationService;
 
 @Controller
 public class AuthenticationController {

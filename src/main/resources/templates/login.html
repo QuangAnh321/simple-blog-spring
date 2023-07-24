@@ -12,9 +12,9 @@
             <div class="title">
                 <h3>Sign In</h3>
                 <p>Let's write down what's on your mind</p>
-                <div th:if="${param.error}">
-                    Invalid username and password.</div>
-                <div th:if="${param.success}">
+                <div class="error-message" th:if="${param.error}">
+                    Invalid username and/or password.</div>
+                <div class="error-message" th:if="${param.success}">
                     You have been logged out.</div>
             </div>
             <div class="login">
