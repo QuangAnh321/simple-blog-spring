@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +9,19 @@
 <body>
     <header id="navigation">
         <h1>My Personal Blog</h1>
-        <h2><a href="/create" target="_blank">Create a new blog</a></h2>
-        <a href="/login" target="_blank">Sign In</a>
-        <a href="/register" target="_blank">Sign Up</a>
-        
-        <div class="user-info">
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Logout" />
-            </form>                
+        <h2><a href="/blog/create" target="_blank">Create a new blog</a></h2>
+        <div sec:authorize="isAnonymous()" class="login-and-register">
+            <a href="/login" target="_blank">Sign In</a>
+            <a href="/register" target="_blank">Sign Up</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            Hello: <span sec:authentication="name"></span>
+            <div class="user-info">
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Logout" />
+                </form>                
+            </div>
         </div>
     </header>
     

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
 <body>
     <div class="blog-creator">
         <h1>Create A New Blog</h1>
-        <form action="#" th:action="@{/create}" method="post" th:object="${blogDTO}" id="create-new-blog-form">
+        <form action="#" th:action="@{/blog/create}" method="post" th:object="${blogDTO}" id="create-new-blog-form">
             <div>
                 <label for="title">Title:</label><br>
                 <input type="text" id="title" th:field="*{title}" placeholder="Your Blog Title">
@@ -31,9 +31,10 @@
                 </select>
             </div>
 
+            <input type="hidden" th:name="userName" id="username-for-submission" th:value="${#authentication.name}">
+            <input type="hidden" value="" id="blog-content-hidden" th:field="*{content}">
 
-            <input type="hidden" value="1" id="user-id" th:field="*{userId}"><br>
-            <input type="hidden" value="" id="blog-content-hidden" th:field="*{content}"><br>
+            <br>
             <input type="submit" value="Create" onclick="createNewBlog()">
         </form>
     </div>

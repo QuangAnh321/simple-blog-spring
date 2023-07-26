@@ -11,6 +11,7 @@ import com.simple.blog.models.Category;
 import com.simple.blog.models.dtos.BlogDTO;
 import com.simple.blog.repositories.BlogRepository;
 import com.simple.blog.repositories.CategoryRepository;
+import com.simple.blog.repositories.UserRepository;
 import com.simple.blog.repositories.records.BlogRecord;
 import com.simple.blog.repositories.records.CategoryRecord;
 import com.simple.blog.ultilities.CommonFunction;
@@ -29,6 +30,9 @@ public class BlogService {
 
     @Autowired
     private CommonFunction commonFunction;
+
+    @Autowired
+    private UserRepository userRepository;
     
     public ArrayList<Blog> getAllBlogs() {
         var blogs = new ArrayList<Blog>();
@@ -54,10 +58,10 @@ public class BlogService {
 
     public void createNewBlog(BlogDTO blogDTO) {
         var dateTime = commonFunction.generateTimestampForNewObject();
-
-        var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(), blogDTO.getContent(), blogDTO.getCategoryId(), blogDTO.getUserId(), dateTime, dateTime);
-
+        var userId = userRepository.findByUsername(blogDTO.getUserName()).get().getId();
+        var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(), blogDTO.getContent(), blogDTO.getCategoryId(), userId, dateTime, dateTime);
         var newwBlogRecord = new BlogRecord(newBlog);
+        
         var savedBlog = blogRepository.save(newwBlogRecord);
         log.info(MessageFormat.format("Saved new blog successfully with ID {0}", savedBlog.getId()));
     }

@@ -12,5 +12,5 @@ public class BlogDTO {
     private String title;
     private String content;
     private long categoryId;
-    private long userId;
+    private String userName;
 }
