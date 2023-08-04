@@ -30,6 +30,7 @@
 
         <div class="article" th:each="blog : ${allBlogs}">
             <a class="title" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">someTitle</a>
+            <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}">edit</a></span>
             <p class="timestamp" th:text="${blog.createdAt}">someTimestamp</p>
             <p class="summary" th:text="${blog.content}">someSummary</p>
             <br>

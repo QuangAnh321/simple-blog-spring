@@ -38,7 +38,8 @@ public class WebSecurityConfig {
                 .permitAll()
             )
             .sessionManagement()
-                .maximumSessions(1).sessionRegistry(sessionRegistry());
+                .maximumSessions(1)
+                .sessionRegistry(sessionRegistry());
 
         return http.build();
     }

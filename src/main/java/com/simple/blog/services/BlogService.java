@@ -2,13 +2,15 @@ package com.simple.blog.services;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.simple.blog.models.Blog;
 import com.simple.blog.models.Category;
-import com.simple.blog.models.dtos.BlogDTO;
+import com.simple.blog.models.dtos.blog.BlogCreateDTO;
+import com.simple.blog.models.dtos.blog.BlogUpdateDTO;
 import com.simple.blog.repositories.BlogRepository;
 import com.simple.blog.repositories.CategoryRepository;
 import com.simple.blog.repositories.UserRepository;
@@ -56,7 +58,7 @@ public class BlogService {
         return categories;
     }
 
-    public void createNewBlog(BlogDTO blogDTO) {
+    public void createNewBlog(BlogCreateDTO blogDTO) {
         var dateTime = commonFunction.generateTimestampForNewObject();
         var userId = userRepository.findByUsername(blogDTO.getUserName()).get().getId();
         var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(), blogDTO.getContent(), blogDTO.getCategoryId(), userId, dateTime, dateTime);
@@ -77,5 +79,22 @@ public class BlogService {
         } else {
             throw new Exception(MessageFormat.format("Blog with id {0} cannot be found", blogId));
         }
+    }
+
+    public boolean isBlogEditable(Blog blog, String username) throws Exception {
+        var user = userRepository.findByUsername(username);
+        return blog.getUserId() == user.get().getId();
+    }
+
+    public Optional<Category> getCategoryInfoForBlog(Blog blog) {
+        return categoryRepository
+                .findById(blog.getCategoryId())
+                .map(categoryRecord -> new Category(categoryRecord.getId(), categoryRecord.getName(), categoryRecord.getCreatedAt(), categoryRecord.getUpdatedAt()));
+    }
+
+    public void updateBlog(BlogUpdateDTO blogUpdateDTO, Long blogId) throws Exception {
+        var blogToUpdate = retrieveSingleBlogById(blogId);
+        blogToUpdate.update(blogUpdateDTO, commonFunction);
+        blogRepository.save(new BlogRecord(blogToUpdate));
     }
 }

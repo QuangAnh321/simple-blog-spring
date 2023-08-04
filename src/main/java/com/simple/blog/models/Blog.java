@@ -2,7 +2,9 @@ package com.simple.blog.models;
 
 import java.time.LocalDateTime;
 
+import com.simple.blog.models.dtos.blog.BlogUpdateDTO;
 import com.simple.blog.repositories.records.BlogRecord;
+import com.simple.blog.ultilities.CommonFunction;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,5 +31,11 @@ public class Blog {
         this.userId = blogRecord.getUserId();
         this.createdAt = blogRecord.getCreatedAt();
         this.updatedAt = blogRecord.getUpdatedAt();
+    }
+
+    public void update(BlogUpdateDTO blogUpdateDTO, CommonFunction commonFunction) {
+        this.setTitle(blogUpdateDTO.getNewTitle());
+        this.setContent(blogUpdateDTO.getNewContent());
+        this.setUpdatedAt(commonFunction.generateTimestampForNewObject());
     }
 }

@@ -3,6 +3,8 @@ package com.simple.blog.services.security;
 import java.text.MessageFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -35,6 +37,19 @@ public class AuthenticationService {
          var savedUser = userRepository.save(newUserRecord);
 
          log.info(MessageFormat.format("Saved new user successfully with ID {0}", savedUser.getId()));
+    }
+
+    public String getCurrentLoggedInUsername() {
+        String username;
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
+
+        return username;
     }
     
 }
