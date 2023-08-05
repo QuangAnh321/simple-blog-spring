@@ -60,7 +60,7 @@ public class BlogController {
             model.addAttribute("blog", blogToDisplayDTO);
             return "singleBlog";
         } catch (Exception ex) {
-            return "redirect:/404";
+            return "404";
         }
     }
 
@@ -75,23 +75,23 @@ public class BlogController {
             var categoryOfBlogToUpdateOpt = blogService.getCategoryInfoForBlog(blog);
 
             if (categoryOfBlogToUpdateOpt.isPresent()) {
-                if (blogService.isBlogEditable(blog, userName)) {
+                if (blogService.isUserCanUpdateOrDeleteThisBlog(blog, userName)) {
                     model.addAttribute("blogToUpdateNewContent", new BlogUpdateDTO());
                     model.addAttribute("blogToUpdate", blogToUpdateDTO);
                     model.addAttribute("categoryOfBlogToUpdate", categoryOfBlogToUpdateOpt.get());
                     return "updateBlog";
                 } else {
-                    return "redirect:/403";
+                    return "403";
                 }
             } else {
                 log.severe(MessageFormat.format("Category info of blog id {0} cannot be found", blogId));
-                return "redirect:/500";
+                return "500";
             }
         } catch (Exception ex) {
             log.severe(MessageFormat.format("Error happened while trying to show update form of blog id {0}", blogId));
             ex.printStackTrace();
 
-            return "redirect:/500";
+            return "500";
         }
     }
 
@@ -105,12 +105,27 @@ public class BlogController {
             log.severe(MessageFormat.format("Error happened while trying to update blog with id {0}", blogId));
             ex.printStackTrace();
 
-            return "redirect:/500";
+            return "500";
         }
     }
 
-    @DeleteMapping("/blog/{id}")
-    public String deleteBlog() {
-        return "";
+    @PostMapping("/blog/delete/{id}")
+    public String deleteBlog(@PathVariable("id") String blogId) {
+        try {
+            var userName = authenticationService.getCurrentLoggedInUsername();
+            var blog = blogService.retrieveSingleBlogById(Long.parseLong(blogId));
+
+            if (blogService.isUserCanUpdateOrDeleteThisBlog(blog, userName)) {
+                blogService.deleteBlog(blog.getId());
+                return "redirect:/";
+            } else {
+                return "403";
+            }
+        } catch (Exception ex) {
+            log.severe(MessageFormat.format("Error happened while trying to delete blog id {0}", blogId));
+            ex.printStackTrace();
+
+            return "500";
+        }
     }
 }

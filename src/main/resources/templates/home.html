@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Personal Blog | Home</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <h1>My Personal Blog</h1>
         <h2><a href="/blog/create" target="_blank">Create a new blog</a></h2>
         <div sec:authorize="isAnonymous()" class="login-and-register">
-            <a href="/login" target="_blank">Sign In</a>
+            <a href="/login">Sign In</a>
             <a href="/register" target="_blank">Sign Up</a>
         </div>
 
@@ -30,7 +31,13 @@
 
         <div class="article" th:each="blog : ${allBlogs}">
             <a class="title" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">someTitle</a>
-            <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}">edit</a></span>
+            <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}"><i class="fa-solid fa-pencil"></i></a></span>
+            <form class="delete-form" sec:authorize="isAuthenticated()" method="post" th:action="@{/blog/delete/{id}(id=${blog.id})}">
+                <input type="hidden" name="blogId" th:value="${blog.id}">
+                <button type="submit" name="Delete">
+                    <i class="fa-regular fa-trash-can"></i>
+                </button>
+            </form>
             <p class="timestamp" th:text="${blog.createdAt}">someTimestamp</p>
             <p class="summary" th:text="${blog.content}">someSummary</p>
             <br>

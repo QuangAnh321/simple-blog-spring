@@ -81,7 +81,7 @@ public class BlogService {
         }
     }
 
-    public boolean isBlogEditable(Blog blog, String username) throws Exception {
+    public boolean isUserCanUpdateOrDeleteThisBlog(Blog blog, String username) throws Exception {
         var user = userRepository.findByUsername(username);
         return blog.getUserId() == user.get().getId();
     }
@@ -96,5 +96,9 @@ public class BlogService {
         var blogToUpdate = retrieveSingleBlogById(blogId);
         blogToUpdate.update(blogUpdateDTO, commonFunction);
         blogRepository.save(new BlogRecord(blogToUpdate));
+    }
+
+    public void deleteBlog(Long blogId) throws Exception {
+        blogRepository.deleteById(blogId);
     }
 }
