@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <title>Personal Blog | Home</title>
 </head>
 <body>
@@ -39,9 +41,13 @@
                 </button>
             </form>
             <p class="timestamp" th:text="${blog.createdAt}">someTimestamp</p>
-            <p class="summary" th:text="${blog.content}">someSummary</p>
+            <p class="summary" th:text="${blog.contentSummary}">someSummary</p>
+            <p>...Read more</p>
             <br>
         </div>
     </section>
+
+    <script th:src="@{/js/quillToolKit.js}"></script>
 </body>
+
 </html>

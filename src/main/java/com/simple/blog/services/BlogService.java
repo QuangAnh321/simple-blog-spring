@@ -40,7 +40,7 @@ public class BlogService {
         var blogs = new ArrayList<Blog>();
         var blogRecords = blogRepository.findAll();
         for (BlogRecord record : blogRecords) {
-            blogs.add(new Blog(record.getId(), record.getTitle(), record.getContent(), record.getCategoryId(), record.getUserId(), record.getCreatedAt(), record.getUpdatedAt()));
+            blogs.add(new Blog(record));
         }
 
         log.info(MessageFormat.format("Retrieved {0} blogs from the database", blogs.size()));
@@ -61,9 +61,12 @@ public class BlogService {
     public void createNewBlog(BlogCreateDTO blogDTO) {
         var dateTime = commonFunction.generateTimestampForNewObject();
         var userId = userRepository.findByUsername(blogDTO.getUserName()).get().getId();
-        var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(), blogDTO.getContent(), blogDTO.getCategoryId(), userId, dateTime, dateTime);
-        var newwBlogRecord = new BlogRecord(newBlog);
+
+        var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(),
+           blogDTO.getContent(), blogDTO.getContentSummary() ,
+           blogDTO.getCategoryId(), userId, dateTime, dateTime);
         
+        var newwBlogRecord = new BlogRecord(newBlog);
         var savedBlog = blogRepository.save(newwBlogRecord);
         log.info(MessageFormat.format("Saved new blog successfully with ID {0}", savedBlog.getId()));
     }

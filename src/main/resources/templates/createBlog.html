@@ -33,23 +33,13 @@
 
             <input type="hidden" th:name="userName" id="username-for-submission" th:value="${#authentication.name}">
             <input type="hidden" value="" id="blog-content-hidden" th:field="*{content}">
+            <input type="hidden" value="" id="blog-content-summary-hidden" th:field="*{contentSummary}">
 
             <br>
             <input type="submit" value="Create" onclick="createNewBlog()">
         </form>
     </div>
 
-    <script>
-        var quill = new Quill('#editor', {
-          theme: 'snow',
-          placeholder: 'Your blog content goes here'
-        });
-
-        function createNewBlog() {
-            const blogContent = quill.getText();
-            document.getElementById("blog-content-hidden").value = blogContent;
-            document.getElementById("create-new-blog-form").submit();
-        }
-    </script>
+    <script th:src="@{/js/quillToolKit.js}"></script>
 </body>
 </html>

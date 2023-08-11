@@ -26,6 +26,7 @@ public class BlogRecord {
     private long id;
     private String title;
     private String content;
+    private String contentSummary;
     private long categoryId;
     private long userId;
     private LocalDateTime createdAt;
@@ -35,6 +36,7 @@ public class BlogRecord {
         this.id = blog.getId();
         this.title = blog.getTitle();
         this.content = blog.getContent();
+        this.contentSummary = blog.getContentSummary();
         this.categoryId = blog.getCategoryId();
         this.userId = blog.getUserId();
         this.createdAt = blog.getCreatedAt();

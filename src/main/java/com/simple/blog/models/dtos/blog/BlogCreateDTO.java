@@ -11,6 +11,7 @@ public class BlogCreateDTO {
      
     private String title;
     private String content;
+    private String contentSummary;
     private long categoryId;
     private String userName;
     

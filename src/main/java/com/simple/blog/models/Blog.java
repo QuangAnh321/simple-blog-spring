@@ -18,6 +18,7 @@ public class Blog {
     private long id;
     private String title;
     private String content;
+    private String contentSummary;
     private long categoryId;
     private long userId;
     private LocalDateTime createdAt;
@@ -27,6 +28,7 @@ public class Blog {
         this.id = blogRecord.getId();
         this.title = blogRecord.getTitle();
         this.content = blogRecord.getContent();
+        this.contentSummary = blogRecord.getContentSummary();
         this.categoryId = blogRecord.getCategoryId();
         this.userId = blogRecord.getUserId();
         this.createdAt = blogRecord.getCreatedAt();
@@ -36,6 +38,7 @@ public class Blog {
     public void update(BlogUpdateDTO blogUpdateDTO, CommonFunction commonFunction) {
         this.setTitle(blogUpdateDTO.getNewTitle());
         this.setContent(blogUpdateDTO.getNewContent());
+        this.setContentSummary(blogUpdateDTO.getNewContentSummary());
         this.setUpdatedAt(commonFunction.generateTimestampForNewObject());
     }
 }
