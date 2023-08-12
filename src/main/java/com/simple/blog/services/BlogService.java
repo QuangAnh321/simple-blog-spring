@@ -63,7 +63,7 @@ public class BlogService {
         var userId = userRepository.findByUsername(blogDTO.getUserName()).get().getId();
 
         var newBlog = new Blog(CommonFunction.DEFAULT_FAKE_ID_FOR_AUTO_GENERATED_CLASS, blogDTO.getTitle(),
-           blogDTO.getContent(), blogDTO.getContentSummary() ,
+           blogDTO.getContent(), blogDTO.getContentSummary(), blogDTO.getContentFormatted(),
            blogDTO.getCategoryId(), userId, dateTime, dateTime);
         
         var newwBlogRecord = new BlogRecord(newBlog);

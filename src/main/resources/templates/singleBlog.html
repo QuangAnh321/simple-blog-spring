@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <title th:text="*{blog.title}">Title</title>
 </head>
 <body>
     <h3 th:text="${blog.title}">someTitle</h3>
     <p th:text="${blog.createdAt}">createdAt</p>
-    <p th:text="${blog.content}">someContent</p>
+    <div class="ql-editor" th:utext="${blog.contentFormatted}"></div>
 </body>
 </html>

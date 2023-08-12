@@ -34,6 +34,7 @@
             <input type="hidden" th:name="userName" id="username-for-submission" th:value="${#authentication.name}">
             <input type="hidden" value="" id="blog-content-hidden" th:field="*{content}">
             <input type="hidden" value="" id="blog-content-summary-hidden" th:field="*{contentSummary}">
+            <input type="hidden" value="" id="blog-content-formatted-hidden" th:field="*{contentFormatted}">
 
             <br>
             <input type="submit" value="Create" onclick="createNewBlog()">

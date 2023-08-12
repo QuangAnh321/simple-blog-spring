@@ -16,6 +16,7 @@ public class BlogViewDTO {
     private long id;
     private String title;
     private String content;
+    private String contentFormatted;
     private long categoryId;
     private String userName;
     private LocalDateTime createdAt;
@@ -25,6 +26,7 @@ public class BlogViewDTO {
         this.id = blog.getId();
         this.title = blog.getTitle();
         this.content = blog.getContent();
+        this.contentFormatted = blog.getContentFormatted();
         this.categoryId = blog.getCategoryId();
         this.userName = userName;
         this.createdAt = blog.getCreatedAt();

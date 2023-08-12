@@ -12,4 +12,5 @@ public class BlogUpdateDTO {
     private String newTitle;
     private String newContent;
     private String newContentSummary;
+    private String newContentFormatted;
 }

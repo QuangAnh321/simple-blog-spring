@@ -32,6 +32,8 @@
             </div>
 
             <input type="hidden" value="" id="blog-content-hidden" th:field="*{newContent}">
+            <input type="hidden" value="" id="blog-content-summary-hidden" th:field="*{newContentSummary}">
+            <input type="hidden" value="" id="blog-content-formatted-hidden" th:field="*{newContentFormatted}">
 
             <br>
             <input type="submit" value="update" onclick="updateCurrentBlog()">
