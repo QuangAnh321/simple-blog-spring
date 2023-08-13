@@ -8,19 +8,20 @@
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <title>Personal Blog | Update Blog</title>
 </head>
-<body th:onload="loadCurrentBlogContent([[${blogToUpdate.content}]])">
+<body th:onload="loadCurrentBlogContent([[${blogViewDTO.content}]])">
     <div class="blog-form">
         <h1>Update Current Blog</h1>
-        <form action="#" th:action="@{/blog/update/} + ${blogToUpdate.id}" method="post" th:object="${blogToUpdateNewContent}" id="update-current-blog-form">
+        <form action="#" th:action="@{/blog/update/} + ${blogViewDTO.id}" method="post" th:object="${blogUpdateDTO}" id="update-current-blog-form">
             <div>
-                <label for="title">Title:</label><br>
-                <input type="text" id="newTitle" name="newTitle" th:value="${blogToUpdate.title}" placeholder="Your Blog Title">
+                <label for="title">Title:</label>
+                <span class="error" th:if="${#fields.hasErrors('newTitle')}" th:errors="*{newTitle}">Title Error</span><br>
+                <input type="text" name="newTitle" th:value="${blogViewDTO.title}" placeholder="Your Blog Title">
             </div>
     
             <div>
                 <label for="content">Content:</label><br>
                 <div id="editor">
-                    <p th:text="${blogToUpdate.content}"></p>
+                    <p th:text="${blogViewDTO.content}"></p>
                 </div>
             </div>
 

@@ -11,3 +11,8 @@
 .delete-form {
     display: inline;
 }
+
+.error {
+    color: red;
+    font-style: italic;
+}

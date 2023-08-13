@@ -13,15 +13,18 @@
                 <h3>Sign Up</h3>
             </div>
             <div class="register">
-                <label for="email">Email:</label><br>
+                <label for="email">Email:</label>
+                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span><br>
                 <input type="email" name="email" th:field="*{email}" placeholder="Your Email">
                 <br>
 
-                <label for="userName">Name:</label><br>
+                <label for="userName">Name:</label>
+                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span><br>
                 <input type="text" name="userName" th:field="*{name}" placeholder="Your Name">
                 <br>
 
-                <label for="password">Password:</label><br>
+                <label for="password">Password:</label>
+                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span><br>
                 <input type="password" name="password" th:field="*{password}" placeholder="Your Password">
                 <br>
             </div>

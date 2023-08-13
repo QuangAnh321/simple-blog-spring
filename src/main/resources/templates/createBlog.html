@@ -11,10 +11,11 @@
 <body>
     <div class="blog-creator">
         <h1>Create A New Blog</h1>
-        <form action="#" th:action="@{/blog/create}" method="post" th:object="${blogDTO}" id="create-new-blog-form">
+        <form action="#" th:action="@{/blog/create}" method="post" th:object="${blogCreateDTO}" id="create-new-blog-form">
             <div>
-                <label for="title">Title:</label><br>
-                <input type="text" id="title" th:field="*{title}" placeholder="Your Blog Title">
+                <label for="title">Title:</label>
+                <span class="error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</span><br>
+                <input type="text" th:field="*{title}" placeholder="Your Blog Title">
             </div>
     
             <div>
