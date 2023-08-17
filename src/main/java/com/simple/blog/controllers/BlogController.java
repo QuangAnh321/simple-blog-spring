@@ -59,7 +59,7 @@ public class BlogController {
         }
     }
 
-    @GetMapping("/blog/{id}")
+    @GetMapping("/blog/read/{id}")
     public String viewSingleBlog(@PathVariable("id") String blogId, Model model) {
         try {
             var userName = authenticationService.getCurrentLoggedInUsername();

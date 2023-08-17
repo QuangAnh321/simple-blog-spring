@@ -10,42 +10,41 @@
     <title>Personal Blog | Home</title>
 </head>
 <body>
-    <header id="navigation">
-        <h1>My Personal Blog</h1>
-        <h2><a href="/blog/create" target="_blank">Create a new blog</a></h2>
-        <div sec:authorize="isAnonymous()" class="login-and-register">
-            <a href="/login">Sign In</a>
-            <a href="/register" target="_blank">Sign Up</a>
-        </div>
+    <div class="container">
+        <header>
+            <div th:replace="~{navbar :: main-navbar}"></div>
+        </header>
 
-        <div sec:authorize="isAuthenticated()">
-            Hello: <span sec:authentication="name"></span>
-            <div class="user-info">
-                <form th:action="@{/logout}" method="post">
-                    <input type="submit" value="Logout" />
-                </form>                
-            </div>
-        </div>
-    </header>
-    
-    <section id="articles">
-        <h2>All your blogs</h2>
+        <section class="homepage">
+            <section id="articles">
+                <div class="article" th:each="blog : ${allBlogs}">
+                    <h2 class="title">
+                        <a th:text="${blog.title}" th:href="@{/blog/read/{id}(id=${blog.id})}">someTitle</a>
+                    </h2>
+                    <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}"><i class="fa-solid fa-pencil"></i></a></span>
+                    <form class="delete-form" sec:authorize="isAuthenticated()" method="post" th:action="@{/blog/delete/{id}(id=${blog.id})}">
+                        <input type="hidden" name="blogId" th:value="${blog.id}">
+                        <button type="submit" name="Delete">
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>
+                    </form>
+                    <p class="timestamp" th:text="${blog.createdAt}">someTimestamp</p>
+                    <div class="entry-content">
+                        <p class="summary"><span th:text="${blog.contentSummary}"></span> ...</p>
+                        <a th:href="@{/blog/read/{id}(id=${blog.id})}" class="button button-read-more">Read More</a>
+                    </div>
+                </div>
+            </section>
 
-        <div class="article" th:each="blog : ${allBlogs}">
-            <a class="title" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">someTitle</a>
-            <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}"><i class="fa-solid fa-pencil"></i></a></span>
-            <form class="delete-form" sec:authorize="isAuthenticated()" method="post" th:action="@{/blog/delete/{id}(id=${blog.id})}">
-                <input type="hidden" name="blogId" th:value="${blog.id}">
-                <button type="submit" name="Delete">
-                    <i class="fa-regular fa-trash-can"></i>
-                </button>
-            </form>
-            <p class="timestamp" th:text="${blog.createdAt}">someTimestamp</p>
-            <p class="summary" th:text="${blog.contentSummary}">someSummary</p>
-            <p>...Read more</p>
-            <br>
-        </div>
-    </section>
+            <aside class="sidebar">
+                <div id="how-to-blog">
+                    <div id="how-to-blog-container">
+                        <img src="/images/howToBlog.webp" alt="">
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </div>
 
     <script th:src="@{/js/quillToolKit.js}"></script>
 </body>

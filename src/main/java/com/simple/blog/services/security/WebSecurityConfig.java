@@ -30,16 +30,16 @@ public class WebSecurityConfig {
         http
             .addFilterBefore(authenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests(requests -> requests
-                .antMatchers( "/", "/login", "/register", "/register/*").permitAll()
-                .anyRequest().authenticated()
+                            .antMatchers("/", "/login", "/register", "/register/*", "/blog/read/*").permitAll()
+                            .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/login")
-                .permitAll()
+                            .loginPage("/login")
+                            .permitAll()
             )
-            .sessionManagement()
-                .maximumSessions(1)
-                .sessionRegistry(sessionRegistry());
+            .sessionManagement(management -> management
+                    .maximumSessions(1)
+                    .sessionRegistry(sessionRegistry()));
 
         return http.build();
     }

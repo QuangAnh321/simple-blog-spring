@@ -1,7 +1,18 @@
+/* Common */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Montserrat, sans-serif;
+}
+
+body {
+    max-width: 1200px;
+    margin: auto;
+}
+
+ul li {
+    list-style: none;
 }
 
 .error-message {
@@ -15,4 +26,168 @@
 .error {
     color: red;
     font-style: italic;
+}
+
+.container {
+    margin: auto;
+    padding: 10px 50px;
+}
+
+.container header {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.button {
+    display: inline-block;
+    background-color: #0087be;
+    color: white;
+    text-decoration: none;
+    padding: 7px 12px;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #999;
+    transition: 300ms;
+}
+
+/* .button-read-more {
+    margin-bottom: 10px;
+} */
+
+/* Navbar */
+.main-navbar {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    display: flex;
+}
+
+.main-navbar .left-navbar {
+    flex-grow: 4;
+}
+
+.main-navbar .left-navbar ul,
+.main-navbar .right-navbar ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-navbar .left-navbar ul li,
+.main-navbar .right-navbar ul li {
+    padding: 20px;
+}
+
+.main-navbar .middle-logo {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-navbar .middle-logo h3 {
+    flex-grow: 2;
+}
+
+.main-navbar .middle-logo img {
+    flex-grow: 1;
+    width: 25px;
+}
+
+.main-navbar .right-navbar {
+    flex-grow: 4;
+    text-align: right;
+}
+
+.main-navbar .left-navbar ul li a,
+.main-navbar .right-navbar ul li a {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #000;
+}
+
+.main-navbar .left-navbar ul li a:hover,
+.main-navbar .right-navbar ul li a:hover {
+    transition: 300ms;
+    color: #dd9933;
+}
+
+/* Homepage */
+.homepage {
+    display: flex;
+}
+
+/* Articles */
+#articles {
+    flex-grow: 2;
+    flex-basis: 67%;
+}
+
+.article {
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+}
+
+.entry-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.title a {
+    text-decoration: none;
+    color: #000;
+}
+
+.title a:hover {
+    transition: 300ms;
+    color: #dd9933;
+}
+
+.timestamp {
+    font-family: Lato, sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.summary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Sidebar */
+.sidebar {
+    flex-grow: 1;
+    flex-basis: 33%;
+}
+
+.sidebar #how-to-blog {
+    width: 70%;
+    border: 1px solid #000;
+}
+
+.sidebar #how-to-blog #how-to-blog-container {
+    margin: auto;
+}
+
+.sidebar #how-to-blog img {
+    width: 50%;
+    
 }
