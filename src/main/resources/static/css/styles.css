@@ -120,6 +120,7 @@ ul li {
 /* Homepage */
 .homepage {
     display: flex;
+    height: 100vh;
 }
 
 /* Articles */
@@ -176,18 +177,35 @@ ul li {
 .sidebar {
     flex-grow: 1;
     flex-basis: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sidebar #how-to-blog {
-    width: 70%;
+    width: 75%;
     border: 1px solid #000;
+    padding: 20px 30px;
+    height: 300px;
 }
 
 .sidebar #how-to-blog #how-to-blog-container {
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.sidebar #how-to-blog img {
-    width: 50%;
-    
+.sidebar #how-to-blog #how-to-blog-container img {
+    width: 80%;
+    margin-bottom: 15px;
+}
+
+.sidebar #how-to-blog #how-to-blog-container p {
+    width: 80%;
+}
+
+/* Footer */
+.footer p {
+    text-align: center;
 }
