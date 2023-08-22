@@ -182,11 +182,16 @@ ul li {
     align-items: center;
 }
 
-.sidebar #how-to-blog {
+.sidebar-item-common {
+    border-radius: 5px;
+    margin-bottom: 20px;
     width: 75%;
     border: 1px solid #000;
-    padding: 20px 30px;
-    height: 300px;
+    padding: 25px 35px;
+}
+
+.sidebar #how-to-blog {
+    height: 400px;
 }
 
 .sidebar #how-to-blog #how-to-blog-container {
@@ -197,12 +202,45 @@ ul li {
 }
 
 .sidebar #how-to-blog #how-to-blog-container img {
-    width: 80%;
+    width: 90%;
     margin-bottom: 15px;
 }
 
 .sidebar #how-to-blog #how-to-blog-container p {
-    width: 80%;
+    width: 90%;
+}
+
+.sidebar #email-subscription {
+    height: 400px;
+}
+
+.sidebar #email-subscription #email-subscription-content p {
+    margin-bottom: 10px;
+}
+
+.sidebar #email-subscription #email-subscription-content label {
+    font-size: 13px;
+}
+
+.sidebar #email-subscription #email-subscription-content input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 20px;
+    border: none;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.sidebar #email-subscription #email-subscription-content input:focus {
+    outline: none;
+    background-color: #ebebeb;
+    transition: 300ms;
+}
+
+.sidebar #email-subscription #email-subscription-content button {
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
 }
 
 /* Footer */
