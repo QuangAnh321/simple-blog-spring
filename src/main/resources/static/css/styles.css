@@ -239,8 +239,20 @@ ul li {
 }
 
 /* Footer */
-.footer p {
+.footer {
     text-align: center;
+}
+
+.footer .contact {
+    padding: 10px;
+}
+
+.footer .contact a {
+    padding: 5px;
+}
+
+.footer .contact a i {
+    color: #000;
 }
 
 /* Login And Regiter Form */
