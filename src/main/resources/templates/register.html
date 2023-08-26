@@ -4,35 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Personal Blog | Register</title>
 </head>
 <body>
-    <div id="register-form">
-        <form action="#" th:action="@{/register}" method="post" th:object="${registerDTO}">
-            <div class="title">
-                <h3>Sign Up</h3>
-            </div>
-            <div class="register">
-                <label for="email">Email:</label>
-                <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span><br>
-                <input type="email" name="email" th:field="*{email}" placeholder="Your Email">
-                <br>
+    <div class="container login-register-form-container">
+        <header>
+            <div th:replace="~{navbar :: main-navbar}"></div>
+        </header>
 
-                <label for="userName">Name:</label>
-                <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span><br>
-                <input type="text" name="userName" th:field="*{name}" placeholder="Your Name">
-                <br>
-
-                <label for="password">Password:</label>
-                <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span><br>
-                <input type="password" name="password" th:field="*{password}" placeholder="Your Password">
-                <br>
-            </div>
+        <div id="login-register-form">
+            <form action="#" th:action="@{/register}" method="post" th:object="${registerDTO}">
+                <div class="title">
+                    <h3>Sign Up</h3>
+                    <p>Make the most of your professional life</p>
+                </div>
+                <div class="form-input-area">
+                    <label for="email">Email:</label>
+                    <span class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
+                    <input type="email" name="email" th:field="*{email}" placeholder="Your Email">
     
-            <input type="submit" value="Sign Up">
-        </form>
+                    <label for="userName">Name:</label>
+                    <span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+                    <input type="text" name="userName" th:field="*{name}" placeholder="Your Name">
+    
+                    <label for="password">Password:</label>
+                    <span class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
+                    <input type="password" name="password" th:field="*{password}" placeholder="Your Password">
+                </div>
+                <div id="main-options">
+                    <input type="submit" class="button" name="Sign Up" value="Sign Up">
+                </div>
+                <div id="seperator">
+                    <span>or</span>   
+                </div>
+                <div id="alternative-options">
+                    <h4>Already have an account ?</h4>
+                    <a href="/login">Sign In</a>
+                </div>
+            </form>
+        </div>
+    
+        <footer>
+            <div th:replace="~{footer :: footer}"></div>
+        </footer>
     </div>
-
-    <h4>Already have an account ? <a href="/login">Sign In Now</a></h4>
 </body>
 </html>

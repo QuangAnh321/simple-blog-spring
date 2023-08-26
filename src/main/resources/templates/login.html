@@ -4,30 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Personal Blog | Login</title>
 </head>
 <body>
-    <div id="login-form">
-        <form th:action="@{/login}" method="post">
-            <div class="title">
-                <h3>Sign In</h3>
-                <p>Let's write down what's on your mind</p>
-                <div class="error-message" th:if="${param.error}">
-                    Invalid username and/or password.</div>
-                <div class="error-message" th:if="${param.logout}">
-                    You have been logged out.</div>
-            </div>
-            <div class="login">
-                <input type="text" name="username" placeholder="Your Username">
-                <input type="password" name="password" placeholder="Your Password">
-            </div>
-    
-            <div class="login-options">
-                <input type="submit" value="Log In">
-            </div>
-        </form>
-    </div>
+    <div class="container login-register-form-container">
+        <header>
+            <div th:replace="~{navbar :: main-navbar}"></div>
+        </header>
 
-    <h4>First time here ? <a href="/register">Sign Up Now</a></h4>
+        <div id="login-register-form">
+            <form th:action="@{/login}" method="post">
+                <div class="title">
+                    <h3>Sign In</h3>
+                    <p>Let's write down what's on your mind</p>
+                    <p class="error-message" th:if="${param.logout}">You have been logged out.</p>
+                </div>
+                <div class="form-input-area">
+                    <input type="text" name="username" placeholder="Your Username">
+                    <input type="password" name="password" placeholder="Your Password">
+                    <div class="error-message" th:if="${param.error}">Invalid username and/or password.</div>
+                </div>
+                <div id="main-options">
+                    <input type="submit" class="button" name="Sign In" value="Sign In">
+                </div>
+                <div id="seperator">
+                    <span>or</span>   
+                </div>
+                <div id="alternative-options">
+                    <h4>First time here ?</h4>
+                    <a href="/register">Sign Up</a>
+                </div>
+            </form>
+        </div>
+
+        <footer>
+            <div th:replace="~{footer :: footer}"></div>
+        </footer>
+    </div>
 </body>
 </html>
