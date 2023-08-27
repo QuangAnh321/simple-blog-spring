@@ -4,7 +4,9 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -109,5 +111,16 @@ public class BlogService {
 
     public void deleteBlog(Long blogId) throws Exception {
         blogRepository.deleteById(blogId);
+    }
+
+    public Long getRandomBlogId() {
+        var blogRecords = blogRepository.findAll();
+        var allBlogIds = StreamSupport
+            .stream(blogRecords.spliterator(), false)
+            .map(record -> record.getId())
+            .collect(Collectors.toList());
+
+        Random rand = new Random();
+        return allBlogIds.get(rand.nextInt(allBlogIds.size()));
     }
 }

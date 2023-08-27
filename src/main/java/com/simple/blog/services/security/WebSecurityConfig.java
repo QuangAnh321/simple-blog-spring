@@ -30,7 +30,7 @@ public class WebSecurityConfig {
         http
             .addFilterBefore(authenticationFilter(authenticationManager), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests(requests -> requests
-                            .antMatchers("/", "/login", "/register", "/register/*", "/blog/read/*").permitAll()
+                            .antMatchers("/", "/login", "/register", "/register/*", "/blog/read/*", "/blog/random").permitAll()
                             .anyRequest().authenticated()
             )
             .formLogin(form -> form

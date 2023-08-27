@@ -149,4 +149,10 @@ public class BlogController {
             return "500";
         }
     }
+
+    @GetMapping("/blog/random")
+    public String getRandomBlog() {
+        var randomBlogId = blogService.getRandomBlogId();
+        return "redirect:/blog/read/" + randomBlogId;
+    }
 }
