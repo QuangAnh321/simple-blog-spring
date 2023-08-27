@@ -65,8 +65,10 @@ public class BlogController {
             var userName = authenticationService.getCurrentLoggedInUsername();
             var blog = blogService.retrieveSingleBlogById(Long.parseLong(blogId));
             var blogToDisplayDTO = new BlogViewDTO(blog, userName);
+            var categoryOfBlogOpt = blogService.getCategoryInfoForBlog(blog);
 
             model.addAttribute("blog", blogToDisplayDTO);
+            model.addAttribute("category", categoryOfBlogOpt.get());
             return "singleBlog";
         } catch (Exception ex) {
             return "404";
@@ -113,7 +115,7 @@ public class BlogController {
             } else {
                 var blogIdLong = Long.parseLong(blogId);
                 blogService.updateBlog(blogToUpdateNewContent, blogIdLong);
-                return "redirect:/blog/" + blogIdLong;
+                return "redirect:/blog/read/" + blogIdLong;
             }
         } catch (Exception ex) {
             log.severe(MessageFormat.format("Error happened while trying to update blog with id {0}", blogId));

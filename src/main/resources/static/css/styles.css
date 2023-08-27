@@ -157,7 +157,8 @@ ul li {
     color: #dd9933;
 }
 
-.timestamp {
+.timestamp,
+#blog-category {
     font-family: Lato, sans-serif;
     font-size: 12px;
     letter-spacing: 1px;
@@ -365,4 +366,32 @@ ul li {
 
 #login-register-form form #alternative-options a:hover {
     text-decoration: underline;
+}
+
+/* Single Blog Display */
+#blog-display {
+    min-height: 100vh;
+}
+
+#blog-display #title {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Create And Update Blog Page*/
+.blog-form {
+    min-height: 100vh;
+}
+
+.blog-form-title {
+    text-align: center;
+}
+
+.blog-form-section {
+    margin-bottom: 10px;
+}
+
+.blog-form-section .title-input {
+    width: 100%;
 }

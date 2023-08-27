@@ -22,9 +22,9 @@
                         <a th:text="${blog.title}" th:href="@{/blog/read/{id}(id=${blog.id})}">someTitle</a>
                     </h2>
                     <span><a sec:authorize="isAuthenticated()" th:href="@{/blog/update/{id}(id=${blog.id})}"><i class="fa-solid fa-pencil"></i></a></span>
-                    <form class="delete-form" sec:authorize="isAuthenticated()" method="post" th:action="@{/blog/delete/{id}(id=${blog.id})}">
+                    <form class="delete-form" id="delete-blog-form" sec:authorize="isAuthenticated()" method="post" th:action="@{/blog/delete/{id}(id=${blog.id})}">
                         <input type="hidden" name="blogId" th:value="${blog.id}">
-                        <button type="submit" name="Delete">
+                        <button type="submit" name="Delete" onclick=" deleteBlog()">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </form>

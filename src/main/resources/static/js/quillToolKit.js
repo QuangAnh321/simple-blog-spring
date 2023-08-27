@@ -43,3 +43,14 @@ function updateCurrentBlog() {
 function loadCurrentBlogContent(blogToUpdateCurrentContent) {
     quill.setContents(JSON.parse(blogToUpdateCurrentContent));
 }
+
+function deleteBlog() {
+    const confirmText = "Are you sure you want to delete this blog ?";
+    if (confirm(confirmText) == true) {
+        document.getElementById("delete-blog-form").submit();
+    } else {
+        document.getElementById("delete-blog-form").addEventListener("click", function(event){
+            event.preventDefault()
+        });
+    }
+}
