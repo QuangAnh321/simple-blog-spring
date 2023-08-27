@@ -2,7 +2,9 @@ package com.simple.blog.services;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -36,15 +38,19 @@ public class BlogService {
     @Autowired
     private UserRepository userRepository;
     
-    public ArrayList<Blog> getAllBlogs() {
+    public List<Blog> getAllBlogs() {
         var blogs = new ArrayList<Blog>();
         var blogRecords = blogRepository.findAll();
         for (BlogRecord record : blogRecords) {
             blogs.add(new Blog(record));
         }
 
-        log.info(MessageFormat.format("Retrieved {0} blogs from the database", blogs.size()));
-        return blogs;
+        var sortedBlogs = blogs.stream().sorted(
+            (currentBlog, nextBlog) -> nextBlog.getCreatedAt().compareTo(currentBlog.getCreatedAt())
+        ).collect(Collectors.toList());
+
+        log.info(MessageFormat.format("Retrieved {0} blogs from the database", sortedBlogs.size()));
+        return sortedBlogs;
     }
 
     public ArrayList<Category> getAllCategories() {
