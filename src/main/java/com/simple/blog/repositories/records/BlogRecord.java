@@ -16,10 +16,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = BlogRecord.TABLE_NAME)
+@Table(name = "blogs")
 public class BlogRecord {
-
-    private static final String TABLE_NAME = "blogs";
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

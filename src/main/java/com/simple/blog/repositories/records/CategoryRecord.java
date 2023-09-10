@@ -14,10 +14,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = CategoryRecord.TABLE_NAME)
+@Table(name = "categories")
 public class CategoryRecord {
-    
-    private static final String TABLE_NAME = "categories";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
